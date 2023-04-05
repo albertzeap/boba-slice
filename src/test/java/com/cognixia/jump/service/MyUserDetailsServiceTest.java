@@ -18,44 +18,56 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.UserOrder;
+import com.cognixia.jump.repository.UserRepository;
+
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+public class MyUserDetailsServiceTest {
 
     //mock the repo methods
-    //@Mock
-    //private UserRepository repo;
+    @Mock
+    private UserRepository repo;
 
     // don't actually autowire the repository that's in the service
 	// instead use the "mocked" repo that we created above
-	//@InjectMocks
-	//private StudentService service;
+	@InjectMocks
+	private MyUserDetailsService service;
 
     @Test
 	void testGetUsers() throws Exception {
-    //     //ARRANGE
-    //     List<User> allUsers = new ArrayList<>();
-	// 	allUsers.add(new User(1, "Peppa", "Pig", "peppa@gmail.com", 3.4, LocalDate.of(2004, 5, 30), "Music"));
-	// 	allUsers.add(new User(2, "Sharpay", "Evans", "sharpay@gmail.com", 3.8, LocalDate.of(1990, 6, 1), "Theater"));
+        //ARRANGE
+        List<User> allUsers = new ArrayList<>();
 
-	// 	when( repo.findAll() ).thenReturn(allUsers);
+		List<UserOrder> order1 = new ArrayList<>();
+		//need to add orders here
 
-    //     //ACT
+		List<UserOrder> order2 = new ArrayList<>();
+		//need to add orders here
 
-    //     List<User> result = service.getUsers();
+		//add users
+		//allUsers.add(new User(Integer id, String username, String password, String firstName, String lastName, String email, Integer paymentCard, Integer phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order));
+		allUsers.add(new User(1, "user1", "password", "first-name1", "last-name1", "a@gmail.com", 123456789, 1112223333, null , null));
 
-    //     //ASSERT
-    //     for(int i = 0; i < allUsers.size(); i++) {
+		when( repo.findAll() ).thenReturn(allUsers);
+
+        //ACT
+
+        List<User> result = service.getUsers();
+
+        //ASSERT
+        for(int i = 0; i < allUsers.size(); i++) {
 			
-	// 		User expected = allUsers.get(i);
-	// 		User actual = result.get(i);
+			User expected = allUsers.get(i);
+			User actual = result.get(i);
 			
-	// 		if( expected.equals(actual) ) {
-	// 			System.out.println("Equals");
-	// 		}
-	// 		else {
-	// 			// will always fail a test
-	// 			fail();
-	// 		}
+			if( expected.equals(actual) ) {
+				System.out.println("Equals");
+			}
+			else {
+				// will always fail a test
+				fail();
+			}
     }
 
     // @Test
