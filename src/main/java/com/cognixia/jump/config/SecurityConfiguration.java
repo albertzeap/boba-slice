@@ -3,10 +3,12 @@ package com.cognixia.jump.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -33,6 +35,15 @@ public class SecurityConfiguration {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         
         //fill in the filter chain here, right now we don't have any endpoints so we don't have anything here
+        http.csrf().disable()
+        .authorizeRequests()
+        .antMatchers("/authenticate").permitAll()
+        .antMatchers("null")
+        .antMatchers(HttpMethod.POST,"/api/user").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
+        .anyRequest().authenticated()
+        .and()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
     }
