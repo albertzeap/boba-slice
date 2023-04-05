@@ -32,6 +32,7 @@ public class SecurityConfiguration {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         
+        //fill in the filter chain here, right now we don't have any endpoints so we don't have anything here
 
         return http.build();
     }
