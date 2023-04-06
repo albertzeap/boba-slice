@@ -86,6 +86,21 @@ public class User implements Serializable{
 
 	}
 
+
+	public User(Integer id, String username, String password, String firstName, String lastName, String email, Integer paymentCard, Integer phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.paymentCard = paymentCard;
+		this.phoneNumber = phoneNumber;
+		this.dietaryRestriction = dietaryRestriction;
+		this.user_order = user_order;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
