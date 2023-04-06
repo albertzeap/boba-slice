@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
+@Table(name="orders")
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -27,7 +29,7 @@ public class Order implements Serializable{
 	private Integer id;
 	
 	@NotBlank
-	@Column(columnDefinition="DEFAULT '0.00'")
+	@Column(columnDefinition="double default 0.00")
 	private Double totalPrice;
 	
 	@NotBlank
@@ -36,7 +38,7 @@ public class Order implements Serializable{
 	
 	@NotBlank
 	@Column(nullable=false)
-	private boolean progress;
+	private Boolean progress;
 	
 
 	@JsonProperty( access = Access.WRITE_ONLY )
@@ -50,6 +52,8 @@ public class Order implements Serializable{
 	
 	
 	// One-to-Many relationship between Drink
+	@JsonProperty( access = Access.WRITE_ONLY )
+	@JsonIgnore
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<Drink> drinks;
 

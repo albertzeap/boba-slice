@@ -29,16 +29,16 @@ public class Drink implements Serializable{
 	private String description;
 
 	@NotBlank
-	@Column(columnDefinition="DEFAULT '1.99'")
+	@Column(columnDefinition=" double default '1.99'")
 	private Double price;
 	
 	@NotBlank
-	@Column(columnDefinition="DEFAULT 0") // 0 is false
-	private boolean veganFiendly;
+	@Column(columnDefinition="default boolean false") // 0 is false
+	private Boolean veganFiendly;
 	
 	@NotBlank
-	@Column(columnDefinition="DEFAULT 0") // 0 is false
-	private boolean lactoseFriendly;
+	@Column(columnDefinition="default boolean false") // 0 is false
+	private Boolean lactoseFriendly;
 	
 	@ManyToOne
 	@JoinColumn( name = "order_id", referencedColumnName = "id")
