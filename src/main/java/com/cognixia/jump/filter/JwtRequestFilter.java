@@ -15,7 +15,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.cognixia.jump.service.MyUserDetailsServiceTest;
+import com.cognixia.jump.service.MyUserDetailsService;
+// import com.cognixia.jump.service.MyUserDetailsServiceTest;
 import com.cognixia.jump.util.JwtUtil;
 
 // filters in spring are used to filter through requests/responses
@@ -29,7 +30,10 @@ import com.cognixia.jump.util.JwtUtil;
 public class JwtRequestFilter extends OncePerRequestFilter { // abstract class that makes sure an action performed once when filter is called
 
 	@Autowired
-	private MyUserDetailsServiceTest userDetailsService;
+	private MyUserDetailsService userDetailsService;
+	
+	// @Autowired
+	// private MyUserDetailsServiceTest userDetailsServiceTest;
 	
 	@Autowired
 	private JwtUtil jwtUtil;

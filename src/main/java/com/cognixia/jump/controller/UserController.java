@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,21 +25,26 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
-    @GetMapping("/user")
-    public ResponseEntity<?> getUsers(){
-        List<User> users = userService.getUsers();
+    @GetMapping("/users")
+    public ResponseEntity<?> getUsers() throws Exception{
 
-        // Check if there are existing users
-        if(users.isEmpty()){
-            return ResponseEntity.status(404).body("No users found");
-        }
+        List<User> users = userService.getUsers();
 
         return ResponseEntity.status(200).body(users);
     }
 
+    // getting the specific user
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable int id) throws Exception {
+
+        User found = userService.getUserById(id);
+
+        return ResponseEntity.status(200).body(found);
+    }
+
     // creating a user
     @PostMapping("/user")
-    public ResponseEntity<?> createUser(@RequestBody User user){
+    public ResponseEntity<?> createUser(@RequestBody User user) throws Exception{
         
         
         user.setId(null);
