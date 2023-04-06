@@ -69,7 +69,8 @@ public class User implements Serializable{
 	private String paymentCard;
 	
 	@NotBlank
-	// @Pattern(regexp="/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$/")
+
+	@Pattern(regexp="^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
 	private String phoneNumber;
 	
 	// Set up the one to many relationship between the relationship table and user
