@@ -1,6 +1,8 @@
 package com.cognixia.jump.controller;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class DrinkController {
 
     // getting a specific drink
     @GetMapping("/drink/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable int id) throws Exception {
+    public ResponseEntity<?> getDrinkById(@PathVariable int id) throws Exception {
 
         Drink found = drinkService.getDrinkById(id);
 
@@ -38,7 +40,7 @@ public class DrinkController {
 
     // creating a drink
     @PostMapping("/drink")
-    public ResponseEntity<?> createUser(@RequestBody Drink drink) throws Exception{
+    public ResponseEntity<?> createDrink(@Valid @RequestBody Drink drink) throws Exception{
         
         drink.setId(null);
 
