@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.cognixia.jump.filter.JwtRequestFilter;
 
@@ -40,7 +41,7 @@ public class SecurityConfiguration {
         .antMatchers("/authenticate").permitAll()
         .antMatchers("null")
         .antMatchers(HttpMethod.POST,"/api/user").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/user/**").hasRole("ADMIN")
+        .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
         .anyRequest().authenticated()
         .and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
