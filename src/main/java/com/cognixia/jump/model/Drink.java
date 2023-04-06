@@ -38,7 +38,7 @@ public class Drink implements Serializable{
 	
 	@NotBlank
 	@Column(columnDefinition="boolean default false") // 0 is false
-	private Boolean veganFiendly;
+	private Boolean veganFriendly;
 	
 	@NotBlank
 	@Column(columnDefinition="boolean default false") // 0 is false
@@ -51,6 +51,20 @@ public class Drink implements Serializable{
 	public Drink() {
 
 	}
+
+	
+
+	public Drink(Integer id, @NotBlank String name, @NotBlank String description, @NotBlank Double price,
+			@NotBlank Boolean veganFriendly, @NotBlank Boolean lactoseFriendly) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.veganFriendly = veganFriendly;
+		this.lactoseFriendly = lactoseFriendly;
+	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -84,12 +98,12 @@ public class Drink implements Serializable{
 		this.price = price;
 	}
 
-	public Boolean getVeganFiendly() {
-		return veganFiendly;
+	public Boolean getVeganFriendly() {
+		return veganFriendly;
 	}
 
-	public void setVeganFiendly(Boolean veganFiendly) {
-		this.veganFiendly = veganFiendly;
+	public void setVeganFriendly(Boolean veganFriendly) {
+		this.veganFriendly = veganFriendly;
 	}
 
 	public Boolean getLactoseFriendly() {
@@ -111,7 +125,17 @@ public class Drink implements Serializable{
 	@Override
 	public String toString() {
 		return "Drink [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", veganFiendly=" + veganFiendly + ", lactoseFriendly=" + lactoseFriendly + ", orderDrink=" + orderDrink + "]";
+				+ ", veganFriendly=" + veganFriendly + ", lactoseFriendly=" + lactoseFriendly + ", orderDrink=" + orderDrink + "]";
+	}
+
+	public String toJson() {
+
+		return "{\"id\" : " + id 
+				+ ", \"name\" : \"" + name + "\""
+				+ ", \"description\" : \"" + description + "\""
+				+ ", \"price\" : \"" + price + "\""
+				+ ", \"veganFriendly\" : " + veganFriendly 
+				+ ", \"lactoseFriendly\" : \"" + lactoseFriendly + "\"}";
 	}
 	
 	
