@@ -69,7 +69,6 @@ public class User implements Serializable{
 	private String paymentCard;
 	
 	@NotBlank
-
 	@Pattern(regexp="^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
 	private String phoneNumber;
 	
