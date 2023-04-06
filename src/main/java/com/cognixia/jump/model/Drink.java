@@ -1,15 +1,19 @@
 package com.cognixia.jump.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity 
 public class Drink implements Serializable{
@@ -29,20 +33,20 @@ public class Drink implements Serializable{
 	private String description;
 
 	@NotBlank
-	@Column(columnDefinition=" double default '1.99'")
+	@Column(columnDefinition="double default 1.99")
 	private Double price;
 	
 	@NotBlank
-	@Column(columnDefinition="default boolean false") // 0 is false
+	@Column(columnDefinition="boolean default false") // 0 is false
 	private Boolean veganFiendly;
 	
 	@NotBlank
-	@Column(columnDefinition="default boolean false") // 0 is false
+	@Column(columnDefinition="boolean default false") // 0 is false
 	private Boolean lactoseFriendly;
 	
-	@ManyToOne
-	@JoinColumn( name = "order_id", referencedColumnName = "id")
-	private Order order;
+	@JsonProperty( access = Access.WRITE_ONLY )
+	@OneToMany(mappedBy = "drink", cascade = CascadeType.ALL)
+	private List<OrderDrink> orderDrink;
 	
 	public Drink() {
 
@@ -80,34 +84,34 @@ public class Drink implements Serializable{
 		this.price = price;
 	}
 
-	public boolean isVeganFiendly() {
+	public Boolean getVeganFiendly() {
 		return veganFiendly;
 	}
 
-	public void setVeganFiendly(boolean veganFiendly) {
+	public void setVeganFiendly(Boolean veganFiendly) {
 		this.veganFiendly = veganFiendly;
 	}
 
-	public boolean isLactoseFriendly() {
+	public Boolean getLactoseFriendly() {
 		return lactoseFriendly;
 	}
 
-	public void setLactoseFriendly(boolean lactoseFriendly) {
+	public void setLactoseFriendly(Boolean lactoseFriendly) {
 		this.lactoseFriendly = lactoseFriendly;
 	}
 
-	public Order getOrder() {
-		return order;
+	public List<OrderDrink> getOrderDrink() {
+		return orderDrink;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrderDrink(List<OrderDrink> orderDrink) {
+		this.orderDrink = orderDrink;
 	}
 
 	@Override
 	public String toString() {
 		return "Drink [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", veganFiendly=" + veganFiendly + ", lactoseFriendly=" + lactoseFriendly + ", order=" + order + "]";
+				+ ", veganFiendly=" + veganFiendly + ", lactoseFriendly=" + lactoseFriendly + ", orderDrink=" + orderDrink + "]";
 	}
 	
 	
