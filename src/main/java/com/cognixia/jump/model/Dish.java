@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+// import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Dish implements Serializable{
