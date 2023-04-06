@@ -31,15 +31,15 @@ public class Dish implements Serializable{
 	private String description;
 	
 	@NotBlank
-	@Column(columnDefinition="DEFAULT '1.99'")
+	@Column(columnDefinition="double default 1.99")
 	private Double price;
 	
 	@NotBlank
-	@Column(columnDefinition="DEFAULT 0") // 0 is false
-	private boolean veganFriendly;
+	@Column(columnDefinition="boolean default false") // 0 is false
+	private Boolean veganFriendly;
 	
 	@ManyToOne
-	@JsonIgnore
+	// @JsonIgnore
 	@JoinColumn( name = "order_id", referencedColumnName = "id")
 	private Order order;
 

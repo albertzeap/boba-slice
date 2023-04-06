@@ -48,7 +48,7 @@ public class User implements Serializable{
 	private Role role;
 
 	// Determines if the account it still active
-	@Column(columnDefinition = "default 1")
+	@Column(columnDefinition = "boolean default true")
 	private boolean enabled; // true or false if user is enabled currently
 	
 	@NotBlank
