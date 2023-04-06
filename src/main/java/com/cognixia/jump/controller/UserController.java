@@ -2,6 +2,8 @@ package com.cognixia.jump.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +46,7 @@ public class UserController {
 
     // creating a user
     @PostMapping("/user")
-    public ResponseEntity<?> createUser(@RequestBody User user) throws Exception{
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws Exception{
         
         
         user.setId(null);
