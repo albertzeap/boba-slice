@@ -37,14 +37,15 @@ public class SecurityConfiguration {
         
         //fill in the filter chain here, right now we don't have any endpoints so we don't have anything here
         http.csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/authenticate").permitAll()
-        .antMatchers("null")
-        .antMatchers(HttpMethod.POST,"/api/user").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
-        .anyRequest().authenticated()
-        .and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            .authorizeRequests()
+            .antMatchers("/authenticate").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/user").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

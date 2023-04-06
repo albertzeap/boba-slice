@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Dish implements Serializable{
 
@@ -37,6 +39,7 @@ public class Dish implements Serializable{
 	private boolean veganFriendly;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn( name = "order_id", referencedColumnName = "id")
 	private Order order;
 

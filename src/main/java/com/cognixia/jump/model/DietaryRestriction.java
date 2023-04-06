@@ -27,8 +27,8 @@ public class DietaryRestriction implements Serializable{
 	private String description; // describes the dietary constraint
 	
 	@JsonProperty( access = Access.WRITE_ONLY )
-	@OneToMany(mappedBy = "dietary_restriction", cascade = CascadeType.ALL)
-	private List<UserDietaryRestriction> userDietaryDescription;
+	@OneToMany(mappedBy = "dietaryRestriction", cascade = CascadeType.ALL)
+	private List<UserDietaryRestriction> userDietaryRestriction;
 
 	public DietaryRestriction() {
 		
@@ -50,18 +50,18 @@ public class DietaryRestriction implements Serializable{
 		this.description = description;
 	}
 
-	public List<UserDietaryRestriction> getUserDietaryDescription() {
-		return userDietaryDescription;
+	public List<UserDietaryRestriction> getuserDietaryRestriction() {
+		return userDietaryRestriction;
 	}
 
-	public void setUserDietaryDescription(List<UserDietaryRestriction> userDietaryDescription) {
-		this.userDietaryDescription = userDietaryDescription;
+	public void setuserDietaryRestriction(List<UserDietaryRestriction> userDietaryRestriction) {
+		this.userDietaryRestriction = userDietaryRestriction;
 	}
 
 	@Override
 	public String toString() {
-		return "DietaryRestriction [id=" + id + ", description=" + description + ", userDietaryDescription="
-				+ userDietaryDescription + "]";
+		return "DietaryRestriction [id=" + id + ", description=" + description + ", userDietaryRestriction="
+				+ userDietaryRestriction + "]";
 	}
 	
 
