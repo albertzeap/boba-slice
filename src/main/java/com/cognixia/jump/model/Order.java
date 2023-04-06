@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -37,7 +37,7 @@ public class Order implements Serializable{
 	private Date timeStamp;
 	
 	@NotBlank
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition="boolean default false")
 	private Boolean progress;
 	
 
@@ -45,17 +45,16 @@ public class Order implements Serializable{
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<UserOrder> userOrder;
 	
-	// One-to-Many relationship between Dish
-	@JsonIgnore
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<Dish> dishes;
-	
-	
-	// One-to-Many relationship between Drink
+	// One-to-Many relationship between OrderDish
 	@JsonProperty( access = Access.WRITE_ONLY )
-	@JsonIgnore
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<Drink> drinks;
+	private List<OrderDish> orderDish;
+	
+	
+	// One-to-Many relationship between OrderDrink
+	@JsonProperty( access = Access.WRITE_ONLY )
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderDrink> orderDrink;
 
 	public Order() {
 		
@@ -90,17 +89,6 @@ public class Order implements Serializable{
 		this.timeStamp = timeStamp;
 	}
 
-
-	public boolean isProgress() {
-		return progress;
-	}
-
-
-	public void setProgress(boolean progress) {
-		this.progress = progress;
-	}
-
-
 	public List<UserOrder> getUserOrder() {
 		return userOrder;
 	}
@@ -109,32 +97,35 @@ public class Order implements Serializable{
 	public void setUserOrder(List<UserOrder> userOrder) {
 		this.userOrder = userOrder;
 	}
-
-	public List<Dish> getDishes() {
-		return dishes;
+	
+	public Boolean getProgress() {
+		return progress;
 	}
 
-
-	public void setDishes(List<Dish> dishes) {
-		this.dishes = dishes;
+	public void setProgress(Boolean progress) {
+		this.progress = progress;
 	}
 
-
-	public List<Drink> getDrinks() {
-		return drinks;
+	public List<OrderDish> getOrderDish() {
+		return orderDish;
 	}
 
-
-	public void setDrinks(List<Drink> drinks) {
-		this.drinks = drinks;
+	public void setOrderDish(List<OrderDish> orderDish) {
+		this.orderDish = orderDish;
 	}
 
+	public List<OrderDrink> getOrderDrink() {
+		return orderDrink;
+	}
+
+	public void setOrderDrink(List<OrderDrink> orderDrink) {
+		this.orderDrink = orderDrink;
+	}
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", totalPrice=" + totalPrice + ", timeStamp=" + timeStamp + ", progress=" + progress
-				+ ", userOrder=" + userOrder + ", dishes=" + dishes + ", drinks=" + drinks + "]";
+				+ ", userOrder=" + userOrder + ", orderDish=" + orderDish + ", orderDrink=" + orderDrink + "]";
 	}
-	
 	
 }

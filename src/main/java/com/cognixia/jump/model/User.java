@@ -66,11 +66,11 @@ public class User implements Serializable{
 	@NotBlank
 	@Pattern(regexp="^[0-9]{16}$")
 	@Column(nullable = false)
-	private Integer paymentCard;
+	private String paymentCard;
 	
 	@NotBlank
 	@Pattern(regexp="^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
-	private Integer phoneNumber;
+	private String phoneNumber;
 	
 	// Set up the one to many relationship between the relationship table and user
 	@JsonProperty( access = Access.WRITE_ONLY )
@@ -87,7 +87,7 @@ public class User implements Serializable{
 	}
 
 
-	public User(Integer id, String username, String password, String firstName, String lastName, String email, Integer paymentCard, Integer phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order) {
+	public User(Integer id, String username, String password, String firstName, String lastName, String email, String paymentCard, String phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -149,19 +149,19 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public Integer getPaymentCard() {
+	public String getPaymentCard() {
 		return paymentCard;
 	}
 
-	public void setPaymentCard(Integer paymentCard) {
+	public void setPaymentCard(String paymentCard) {
 		this.paymentCard = paymentCard;
 	}
 
-	public Integer getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
