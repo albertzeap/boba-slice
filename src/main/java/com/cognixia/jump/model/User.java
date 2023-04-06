@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,12 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+	// we'll primarily be using User
+	// Admin roles can be implemented in the future
+	public static enum Role {
+		ROLE_USER, ROLE_ADMIN
+	}
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
@@ -33,6 +41,15 @@ public class User implements Serializable{
 	@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") 
 	@Column(unique = true, nullable = false)
 	private String password;
+
+	// For security purposes
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role;
+
+	// Determines if the account it still active
+	@Column(columnDefinition = "boolean default true")
+	private boolean enabled; // true or false if user is enabled currently
 	
 	@NotBlank
 	private String firstName;
@@ -162,6 +179,22 @@ public class User implements Serializable{
 
 	public void setUser_order(List<UserOrder> user_order) {
 		this.user_order = user_order;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override
