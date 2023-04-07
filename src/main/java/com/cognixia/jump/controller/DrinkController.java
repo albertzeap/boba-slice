@@ -27,7 +27,7 @@ public class DrinkController {
     @Autowired
     DrinkService drinkService;
 
-    @GetMapping("/drinks")
+    @GetMapping("/drink/menu")
     public ResponseEntity<?> getDrinks() throws Exception{
 
         List<Drink> drinks = drinkService.getDrinks();
