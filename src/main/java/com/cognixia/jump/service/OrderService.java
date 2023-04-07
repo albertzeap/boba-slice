@@ -42,9 +42,11 @@ public class OrderService {
         return orders;
     }
 
-    public Order getOrderById(int id){
+    public OrderMenuItem getOrderById(int id) throws ResourceNotFoundException{
 
-        return null;
+        OrderMenuItem exists = orderRepo.viewOrder(id);
+
+        return exists;
     }
 
 

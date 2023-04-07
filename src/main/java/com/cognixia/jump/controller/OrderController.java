@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.MenuItem;
 import com.cognixia.jump.model.Order;
+import com.cognixia.jump.model.OrderMenuItem;
 import com.cognixia.jump.service.OrderService;
 
 
@@ -39,12 +40,11 @@ public class OrderController {
 
     // Gets a specific order
     @GetMapping("/order/{id}")
-    public ResponseEntity<?> getOrderById(@PathVariable int id) {
+    public ResponseEntity<?> getOrderById(@PathVariable int id) throws ResourceNotFoundException {
         
-        // List<OrderMenuItem> menuItems = orderService.getOrderById(id);
-        
+        OrderMenuItem items = orderService.getOrderById(id);
 
-        return ResponseEntity.status(201).body(null);
+        return ResponseEntity.status(201).body(items);
     }
 
     @PutMapping("/order")

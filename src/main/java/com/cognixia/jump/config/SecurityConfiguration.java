@@ -45,6 +45,8 @@ public class SecurityConfiguration {
             .antMatchers(HttpMethod.GET,"/api/menu/dishes").permitAll()
             .antMatchers("/api/menu").permitAll()
             .antMatchers("/api/drinks").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/orders").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/order/*").permitAll()
             .antMatchers(HttpMethod.DELETE, "/api/order/item").permitAll()
             .antMatchers(HttpMethod.POST, "/api/order").permitAll()
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
