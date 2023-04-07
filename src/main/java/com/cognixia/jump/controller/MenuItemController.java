@@ -2,6 +2,8 @@ package com.cognixia.jump.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,27 +23,27 @@ public class MenuItemController {
     @Autowired
 	MenuItemService menuItemService;
 	
-	@GetMapping("/menu")
-	public ResponseEntity<?> getMenu() throws Exception {
-		List<MenuItem> menuItem = menuItemService.getMenuItemes(); // this will get all the food from dish table and will be displayed as a menu
+    // Get the pizza menu
+	@GetMapping("/menu/dishes")
+	public ResponseEntity<?> getDishMenu() throws Exception {
+		List<MenuItem> dishes = menuItemService.getDishes(); 
 		
-		return ResponseEntity.status(200).body(menuItem);
+		return ResponseEntity.status(200).body(dishes);
 	}
-	
-    // getting a specific drink
-    @GetMapping("/menuItem/{id}")
-    public ResponseEntity<?> getMenuItemById(@PathVariable int id) throws Exception {
 
-        MenuItem found = menuItemService.getMenuItemById(id);
+    // Get the boba menu
+    @GetMapping("/menu/drinks")
+    public ResponseEntity<?> getDrinkMenu () throws Exception {
+        List<MenuItem> drinks = menuItemService.getDrinks();
 
-        return ResponseEntity.status(200).body(found);
-    }
+        return ResponseEntity.status(200).body(drinks);
+    }    
 
     
 
     // creating a menuItem
     @PostMapping("/menuItem")
-    public ResponseEntity<?> createMenuItem(@RequestBody MenuItem menuItem) throws Exception{
+    public ResponseEntity<?> createMenuItem(@Valid @RequestBody MenuItem menuItem) throws Exception{
         
         menuItem.setId(null);
 
