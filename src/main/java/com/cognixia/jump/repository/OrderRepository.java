@@ -18,7 +18,7 @@ import com.cognixia.jump.model.OrderMenuItem;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     @Query(value="select * from order_menu_item o join menu_item m on o.menu_item_id = m.id join user_order u on o.order_id = u.order_id where user_id = ?1 ", nativeQuery = true)
-    public List<MenuItem> viewOrder();
+    public List<OrderMenuItem> viewOrder();
        
     @Query(value = "INSERT into order_menu_item (id, menu_item_id, order_id) values (:id, :menuItemId, :orderId) ", nativeQuery = true)
     public int addToOrder(@Param(value="id") int id, @Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);

@@ -48,11 +48,14 @@ public class OrderService {
     }
 
 
-    public Boolean removeItem(String name){
-
-        
-
-
-        return null;
+    public Boolean deleteItem(int menuItemId, int orderId) throws ResourceNotFoundException {
+    	List<OrderMenuItem> exists = orderRepo.existsItemById(menuItemId, orderId);
+    	
+    	if(!exists.isEmpty()) { 
+    		orderRepo.deleteItemById(menuItemId, orderId);
+    		return true;
+    	}
+    	
+        throw new ResourceNotFoundException("Menu item", menuItemId);
     }
 }

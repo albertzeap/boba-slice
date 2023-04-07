@@ -2,6 +2,8 @@ package com.cognixia.jump.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +41,7 @@ public class OrderController {
     @GetMapping("/order/{id}")
     public ResponseEntity<?> getOrderById(@PathVariable int id) {
         
-        List<MenuItem> menuItems = orderService.getOrderById(id);
+        // List<OrderMenuItem> menuItems = orderService.getOrderById(id);
         
 
         return ResponseEntity.status(201).body(null);
@@ -47,6 +49,9 @@ public class OrderController {
 
     @PutMapping("/order")
     public ResponseEntity<?> addItem(@RequestBody MenuItem menuItem) {
+
+        return ResponseEntity.status(201).body(null);
+    }
 
     @DeleteMapping("/order/{id}")
     public ResponseEntity<?> removeMenuItem(@PathParam(value="menuItemId") int menuItemId, @PathParam(value="orderId") int orderId) throws ResourceNotFoundException{
