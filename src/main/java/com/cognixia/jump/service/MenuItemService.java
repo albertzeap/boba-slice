@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognixia.jump.model.MenuItem;
+import com.cognixia.jump.repository.MenuItemRepository;
+
 @Service
 public class MenuItemService {
 
@@ -13,7 +16,7 @@ public class MenuItemService {
 	MenuItemRepository menuItemRepo;
 	
 	public List<MenuItem> getMenuItemes() throws Exception {
-		List<MenuItem> MenuItemList = MenuItemRepo.findAll();
+		List<MenuItem> MenuItemList = menuItemRepo.findAll();
 		
 		// check if there is a list of drinks available
 		if(MenuItemList.isEmpty()) {
@@ -24,7 +27,7 @@ public class MenuItemService {
 	}
 	
 	public MenuItem getMenuItemById(int id) throws Exception {
-		Optional<MenuItem> found = MenuItemRepo.findById(id);
+		Optional<MenuItem> found = menuItemRepo.findById(id);
 		
 		if(!found.isPresent()) {
 			throw new Exception("MenuItem with id " + id + " not found");
@@ -35,13 +38,13 @@ public class MenuItemService {
 	
 	public MenuItem createMenuItem(MenuItem MenuItem) throws Exception {
 		// we will add proper error checks later on
-		Optional<MenuItem> exists = MenuItemRepo.findByName(MenuItem.getName());
+		Optional<MenuItem> exists = menuItemRepo.findByName(MenuItem.getName());
 		
 		if(exists.isPresent()) {
 			throw new Exception("MenuItem: " + MenuItem.getName() + " already exists");
 		}
 		
-		return MenuItemRepo.save(MenuItem);
+		return menuItemRepo.save(MenuItem);
 	}
 
 }
