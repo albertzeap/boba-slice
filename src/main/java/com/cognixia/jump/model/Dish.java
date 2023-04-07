@@ -49,6 +49,15 @@ public class Dish implements Serializable{
 	public Dish() {
 
 	}
+	
+	public Dish(Integer id, String name, String description, Double price, Boolean veganFriendly) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.veganFriendly = veganFriendly;
+	}
 
 	public Integer getId() {
 		return id;
@@ -104,5 +113,13 @@ public class Dish implements Serializable{
 				+ ", veganFriendly=" + veganFriendly + ", orderDish=" + orderDish + "]";
 	}
 	
+	public String toJson() {
 
+		return "{\"id\" : " + id 
+				+ ", \"name\" : \"" + name + "\""
+				+ ", \"description\" : \"" + description + "\""
+				+ ", \"price\" : \"" + price + "\""
+				+ ", \"veganFriendly\" : " + veganFriendly;
+	}
+	
 }

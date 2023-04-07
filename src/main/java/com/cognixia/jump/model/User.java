@@ -69,7 +69,6 @@ public class User implements Serializable{
 	private String paymentCard;
 	
 	@NotBlank
-
 	@Pattern(regexp="^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
 	private String phoneNumber;
 	
@@ -86,6 +85,24 @@ public class User implements Serializable{
 	public User() {
 
 	}
+
+	public User(Integer id, @NotBlank String username,
+			@NotBlank @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") String password, Role role,
+			boolean enabled, @NotBlank String firstName, @NotBlank String lastName,
+			@Pattern(regexp = "^.+@.+$") String email, @NotBlank @Pattern(regexp = "^[0-9]{16}$") String paymentCard,
+			@NotBlank String phoneNumber) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.enabled = enabled;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.paymentCard = paymentCard;
+		this.phoneNumber = phoneNumber;
+	}
+
 
 
 	public User(Integer id, String username, String password, String firstName, String lastName, String email, String paymentCard, String phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order) {
@@ -198,6 +215,8 @@ public class User implements Serializable{
 		this.enabled = enabled;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
@@ -205,6 +224,19 @@ public class User implements Serializable{
 				+ phoneNumber + ", dietaryRestriction=" + dietaryRestriction + ", user_order=" + user_order + "]";
 	}
 
+	public String toJson() {
+
+		return "{\"id\" : " + id 
+				+ ", \"username\" : \"" + username + "\""
+				+ ", \"password\" : \"" + password + "\""
+				+ ", \"firstName\" : \"" + firstName + "\""
+				+ ", \"lastName\" : \"" + lastName + "\""
+				+ ", \"email\" : \"" + email + "\""
+				+ ", \"paymentCard\" : " + paymentCard 
+				+ ", \"phoneNumber\" : \"" + phoneNumber + "\""
+				+ ", \"dietaryRestriction\" : \"" + dietaryRestriction + "\""
+				+ ", \"user_order\" : \"" + user_order + "\"}";
+	}
 
 	
 
