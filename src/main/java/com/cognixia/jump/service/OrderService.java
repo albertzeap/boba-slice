@@ -5,7 +5,13 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.cognixia.jump.model.Order;
+import com.cognixia.jump.repository.OrderRepository;
 
 import com.cognixia.jump.model.Order;
 import com.cognixia.jump.repository.OrderRepository;
@@ -26,4 +32,29 @@ public class OrderService {
 		
 		return orderRepo.save(order);
 	}
+    
+    @Autowired
+    OrderRepository orderRepository;
+
+
+    public List<Order> getOrders(){
+        
+        List<Order> orders = orderRepository.findAll();
+
+        return orders;
+    }
+
+    public Order getOrderById(int id){
+
+        
+    }
+
+
+    public Boolean removeItem(String name){
+
+        
+
+
+        return null;
+    }
 }
