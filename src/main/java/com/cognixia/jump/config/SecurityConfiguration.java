@@ -41,6 +41,7 @@ public class SecurityConfiguration {
             .authorizeRequests()
             .antMatchers("/authenticate").permitAll()
             .antMatchers(HttpMethod.POST,"/api/user").permitAll()
+            .antMatchers("/api/menu").permitAll()
             .antMatchers("/api/drinks").permitAll()
             .antMatchers(HttpMethod.POST, "/api/order").permitAll()
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
