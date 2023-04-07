@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognixia.jump.model.MenuItem;
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Order;
 import com.cognixia.jump.model.OrderMenuItem;
+import com.cognixia.jump.repository.OrderRepository;
+
+import com.cognixia.jump.model.Order;
 import com.cognixia.jump.repository.OrderRepository;
 
 @Service
@@ -38,22 +42,10 @@ public class OrderService {
         return orders;
     }
 
-    // Gets a specific order
-    public List<MenuItem> getOrderById(int id){
+    public Order getOrderById(int id){
 
         return null;
     }
-
-    public MenuItem addMenuItem(MenuItem menuItem){
-
-        OrderMenuItem orderMenuItem = new(null, )
-        orderRepo.addToOrder(0, menuItem.getId(), 0);
-
-        return null;
-
-    }
-
-    
 
 
     public Boolean removeItem(String name){

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.MenuItem;
 import com.cognixia.jump.model.Order;
 import com.cognixia.jump.service.OrderService;
@@ -47,18 +48,12 @@ public class OrderController {
     @PutMapping("/order")
     public ResponseEntity<?> addItem(@RequestBody MenuItem menuItem) {
 
-        orderService.addMenuItem(menuItem);
+    @DeleteMapping("/order/{id}")
+    public ResponseEntity<?> removeMenuItem(@PathParam(value="menuItemId") int menuItemId, @PathParam(value="orderId") int orderId) throws ResourceNotFoundException{
 
-        return ResponseEntity.status(201).body(menuItem);
-    }
-    
+        orderService.deleteItem(menuItemId, orderId);
 
-    @DeleteMapping("/order{name}")
-    public ResponseEntity<?> removeItem(@PathVariable String name){
-
-        orderService.removeItem(name);
-
-        return ResponseEntity.status(201).body(null);
+        return ResponseEntity.status(200).body("Deleted item with id = " + menuItemId + "from order #" + menuItemId);
     }
     
 }  
