@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity 
-public class OrderDish implements Serializable{
+public class OrderMenuItem implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,18 +23,18 @@ public class OrderDish implements Serializable{
 	private Order order;
 	
 	@ManyToOne
-	@JoinColumn( name = "dish_id", referencedColumnName = "id")
-	private Dish dish;
+	@JoinColumn( name = "menu_item_id", referencedColumnName = "id")
+	private MenuItem menuItem;
 
-	public OrderDish() {
+	public OrderMenuItem() {
 
 	}
 	
-	public OrderDish(Integer id, Order order, Dish dish) {
+	public OrderMenuItem(Integer id, Order order, MenuItem menuItem) {
 		super();
 		this.id = id;
 		this.order = order;
-		this.dish = dish;
+		this.menuItem = menuItem;
 	}
 
 	public Integer getId() {
@@ -53,17 +53,17 @@ public class OrderDish implements Serializable{
 		this.order = order;
 	}
 
-	public Dish getDish() {
-		return dish;
+	public MenuItem getDish() {
+		return menuItem;
 	}
 
-	public void setDish(Dish dish) {
-		this.dish = dish;
+	public void setDish(MenuItem dish) {
+		this.menuItem = dish;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDish [id=" + id + ", order=" + order + ", dish=" + dish + "]";
+		return "OrderDish [id=" + id + ", order=" + order + ", MenuItem=" + menuItem + "]";
 	}
 
 }

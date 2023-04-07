@@ -75,11 +75,6 @@ public class User implements Serializable{
 	// Set up the one to many relationship between the relationship table and user
 	@JsonProperty( access = Access.WRITE_ONLY )
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<UserDietaryRestriction> dietaryRestriction;
-	
-	// Set up the one to many relationship between the relationship table and user
-	@JsonProperty( access = Access.WRITE_ONLY )
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<UserOrder> user_order;
 
 	public User() {
@@ -105,7 +100,7 @@ public class User implements Serializable{
 
 
 
-	public User(Integer id, String username, String password, String firstName, String lastName, String email, String paymentCard, String phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order) {
+	public User(Integer id, String username, String password, String firstName, String lastName, String email, String paymentCard, String phoneNumber, List<UserOrder> user_order) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -114,7 +109,6 @@ public class User implements Serializable{
 		this.email = email;
 		this.paymentCard = paymentCard;
 		this.phoneNumber = phoneNumber;
-		this.dietaryRestriction = dietaryRestriction;
 		this.user_order = user_order;
 	}
 
@@ -183,14 +177,6 @@ public class User implements Serializable{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public List<UserDietaryRestriction> getDietaryRestriction() {
-		return dietaryRestriction;
-	}
-
-	public void setDietaryRestriction(List<UserDietaryRestriction> dietaryRestriction) {
-		this.dietaryRestriction = dietaryRestriction;
-	}
-
 	public List<UserOrder> getUser_order() {
 		return user_order;
 	}
@@ -215,13 +201,11 @@ public class User implements Serializable{
 		this.enabled = enabled;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", paymentCard=" + paymentCard + ", phoneNumber="
-				+ phoneNumber + ", dietaryRestriction=" + dietaryRestriction + ", user_order=" + user_order + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", enabled="
+				+ enabled + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", paymentCard=" + paymentCard + ", phoneNumber=" + phoneNumber + ", user_order=" + user_order + "]";
 	}
 
 	public String toJson() {
@@ -234,7 +218,6 @@ public class User implements Serializable{
 				+ ", \"email\" : \"" + email + "\""
 				+ ", \"paymentCard\" : " + paymentCard 
 				+ ", \"phoneNumber\" : \"" + phoneNumber + "\""
-				+ ", \"dietaryRestriction\" : \"" + dietaryRestriction + "\""
 				+ ", \"user_order\" : \"" + user_order + "\"}";
 	}
 

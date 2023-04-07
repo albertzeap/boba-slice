@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+// advice controller on what to do when certain exceptions are thrown
 @ControllerAdvice
 public class GlobalExceptionHandler {
     
@@ -24,5 +25,31 @@ public class GlobalExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), errors.toString(), request.getDescription(false) );
 
         return ResponseEntity.status(400).body(errorDetails);
+    }
+    
+    // Custom exception handler 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> resourceNotFound( ResourceNotFoundException ex, WebRequest request){
+    	ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+    	
+    	return ResponseEntity.status(404).body(errorDetails);
+    }
+    
+    // Another custom exception
+    // This exception will be thrown when the topping's for a pizza exceeds 5
+    @ExceptionHandler(ToppingsLimitException.class)
+    public ResponseEntity<?> toppingsLimitNotValid(ToppingsLimitException ex, WebRequest request){
+    	ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+    	
+    	return ResponseEntity.status(404).body(errorDetails);
+    }
+    
+    // Another custom exception
+    // This exception will be thrown when the topping's for a pizza exceeds 5
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<?> userNotValid(UserExistsException ex, WebRequest request){
+    	ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+    	
+    	return ResponseEntity.status(404).body(errorDetails);
     }
 }
