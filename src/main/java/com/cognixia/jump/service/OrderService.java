@@ -10,7 +10,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Order;
+import com.cognixia.jump.model.OrderMenuItem;
 import com.cognixia.jump.repository.OrderRepository;
 
 import com.cognixia.jump.model.Order;
@@ -45,16 +47,18 @@ public class OrderService {
     }
 
     public Order getOrderById(int id){
-
         return null;
     }
 
 
-    public Boolean removeItem(String name){
-
-        
-
-
-        return null;
+    public Boolean deleteItem(int menuItemId, int orderId) throws ResourceNotFoundException {
+    	List<OrderMenuItem> exists = orderRepo.existsItemById(menuItemId, orderId);
+    	
+    	if(!exists.isEmpty()) { 
+    		orderRepo.deleteItemById(menuItemId, orderId);
+    		return true;
+    	}
+    	
+        throw new ResourceNotFoundException("Menu item", menuItemId);
     }
 }
