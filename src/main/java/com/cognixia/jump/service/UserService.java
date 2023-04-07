@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
+import com.cognixia.jump.exception.UserExistsException;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.repository.UserRepository;
 
@@ -15,41 +17,28 @@ public class UserService {
     @Autowired
     UserRepository userRepo;
 
-    public List<User> getUsers() throws Exception{
-
-        List<User> isEmpty = userRepo.findAll();
-
-        // Check if there is a list of users available
-        if(isEmpty.isEmpty()){
-            // We can create custom exceptions and a global exception handler later
-            throw new Exception("No current users");
-        }
-
+    public List<User> getUsers(){
         return userRepo.findAll();
     }
 
     
-    public User getUserById(int id) throws Exception{
+    public User getUserById(int id) throws ResourceNotFoundException {
 
         Optional<User> found = userRepo.findById(id);
 
         if(!found.isPresent()){
-            throw new Exception("User with id " + id + " not found");
+            throw new ResourceNotFoundException("User", id);
         }
 
         return found.get();
     }
 
-    public User createUser(User user) throws Exception{  
+    public User createUser(User user) throws UserExistsException{  
         
-        
-        // we will add proper error checks later on 
-        // for example we need to check if this user already exists in the 
-        // database. For now we will just save
         Optional<User> exists = userRepo.findByUsername(user.getUsername());
 
         if(exists.isPresent()){
-            throw new Exception("User " + user.getUsername() + " already exists");
+            throw new UserExistsException("User", user.getUsername());
         }
 
 
