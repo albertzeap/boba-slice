@@ -61,23 +61,5 @@ public class OrderController {
         return ResponseEntity.status(201).body(null);
     }
     
-}
+}  
 
-
-
-    @Autowired
-	OrderService orderService;
-	
-	 // creating a order
-     @PostMapping("/order")
-     public ResponseEntity<?> createDrink(@Valid @RequestBody Order order) throws Exception{
-         
-         order.setId(null);
- 
-         Order created = orderService.createOrder(order);
-         return ResponseEntity.status(201).body(created);
-     }
-
-    
-    
-}
