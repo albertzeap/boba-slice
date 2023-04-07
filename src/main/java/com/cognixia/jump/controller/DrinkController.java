@@ -17,6 +17,12 @@ import com.cognixia.jump.service.DrinkService;
 
 @RestController
 @RequestMapping("/api")
+
+// OrderController -> createOrder(), addItem(), removeItem()
+// DrinkController -> getAllDrinks() *to load up menu*, getDrinkById() *to select specific drink*
+//                 ->  
+
+
 public class DrinkController {
     @Autowired
     DrinkService drinkService;
