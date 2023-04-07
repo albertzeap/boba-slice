@@ -15,9 +15,9 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-@Entity 
-public class Drink implements Serializable{
-
+@Entity
+public class MenuItem implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -44,27 +44,32 @@ public class Drink implements Serializable{
 	@Column(columnDefinition="boolean default false") // 0 is false
 	private Boolean lactoseFriendly;
 	
-	@JsonProperty( access = Access.WRITE_ONLY )
-	@OneToMany(mappedBy = "drink", cascade = CascadeType.ALL)
-	private List<OrderDrink> orderDrink;
+	@NotBlank
+	@Column(columnDefinition="varchar(25) check (type in ('Drink', 'Dish'))", nullable=false)
+	private String type;
 	
-	public Drink() {
+	
+	@JsonProperty( access = Access.WRITE_ONLY )
+	@OneToMany(mappedBy = "menuItem", cascade = CascadeType.ALL)
+	private List<OrderMenuItem> orderMenuItem;
+
+	public MenuItem() {
 
 	}
 
-	
-
-	public Drink(Integer id, @NotBlank String name, @NotBlank String description, @NotBlank Double price,
-			@NotBlank Boolean veganFriendly, @NotBlank Boolean lactoseFriendly) {
+	public MenuItem(Integer id, String name, String description, Double price,
+			Boolean veganFriendly, Boolean lactoseFriendly, String type,
+			List<OrderMenuItem> orderMenuItem) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.veganFriendly = veganFriendly;
 		this.lactoseFriendly = lactoseFriendly;
+		this.type = type;
+		this.orderMenuItem = orderMenuItem;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -114,31 +119,28 @@ public class Drink implements Serializable{
 		this.lactoseFriendly = lactoseFriendly;
 	}
 
-	public List<OrderDrink> getOrderDrink() {
-		return orderDrink;
+	public String getType() {
+		return type;
 	}
 
-	public void setOrderDrink(List<OrderDrink> orderDrink) {
-		this.orderDrink = orderDrink;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public List<OrderMenuItem> getOrderMenuItem() {
+		return orderMenuItem;
+	}
+
+	public void setOrderMenuItem(List<OrderMenuItem> orderMenuItem) {
+		this.orderMenuItem = orderMenuItem;
 	}
 
 	@Override
 	public String toString() {
-		return "Drink [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", veganFriendly=" + veganFriendly + ", lactoseFriendly=" + lactoseFriendly + ", orderDrink=" + orderDrink + "]";
-	}
-
-	public String toJson() {
-
-		return "{\"id\" : " + id 
-				+ ", \"name\" : \"" + name + "\""
-				+ ", \"description\" : \"" + description + "\""
-				+ ", \"price\" : \"" + price + "\""
-				+ ", \"veganFriendly\" : " + veganFriendly 
-				+ ", \"lactoseFriendly\" : \"" + lactoseFriendly + "\"}";
+		return "MenuItem [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", veganFriendly=" + veganFriendly + ", lactoseFriendly=" + lactoseFriendly + ", type=" + type
+				+ ", orderMenuItem=" + orderMenuItem + "]";
 	}
 	
 	
-	
-
 }

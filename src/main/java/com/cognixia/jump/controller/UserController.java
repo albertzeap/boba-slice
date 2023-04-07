@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cognixia.jump.exception.ResourceNotFoundException;
+import com.cognixia.jump.exception.UserExistsException;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.service.UserService;
 
@@ -28,16 +30,21 @@ public class UserController {
     PasswordEncoder encoder;
 
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers() throws Exception{
+    public ResponseEntity<?> getUsers(){
 
         List<User> users = userService.getUsers();
+        
+        // checks if users list is empty
+        if(users.isEmpty()) {
+        	return ResponseEntity.status(200).body("There are currenly no users!");
+        }
 
         return ResponseEntity.status(200).body(users);
     }
 
     // getting the specific user
     @GetMapping("/user/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable int id) throws Exception {
+    public ResponseEntity<?> getUserById(@PathVariable int id) throws ResourceNotFoundException {
 
         User found = userService.getUserById(id);
 
@@ -46,7 +53,7 @@ public class UserController {
 
     // creating a user
     @PostMapping("/user")
-    public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws Exception{
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws UserExistsException{
         
         
         user.setId(null);

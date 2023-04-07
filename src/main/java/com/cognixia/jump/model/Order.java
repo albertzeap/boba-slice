@@ -48,13 +48,7 @@ public class Order implements Serializable{
 	// One-to-Many relationship between OrderDish
 	@JsonProperty( access = Access.WRITE_ONLY )
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDish> orderDish;
-	
-	
-	// One-to-Many relationship between OrderDrink
-	@JsonProperty( access = Access.WRITE_ONLY )
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<OrderDrink> orderDrink;
+	private List<OrderMenuItem> orderMenuItem;
 
 	public Order() {
 		
@@ -106,26 +100,19 @@ public class Order implements Serializable{
 		this.progress = progress;
 	}
 
-	public List<OrderDish> getOrderDish() {
-		return orderDish;
+	public List<OrderMenuItem> getOrderDish() {
+		return orderMenuItem;
 	}
 
-	public void setOrderDish(List<OrderDish> orderDish) {
-		this.orderDish = orderDish;
+	public void setOrderMenuItem(List<OrderMenuItem> orderMenuItem) {
+		this.orderMenuItem = orderMenuItem;
 	}
 
-	public List<OrderDrink> getOrderDrink() {
-		return orderDrink;
-	}
-
-	public void setOrderDrink(List<OrderDrink> orderDrink) {
-		this.orderDrink = orderDrink;
-	}
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", totalPrice=" + totalPrice + ", timeStamp=" + timeStamp + ", progress=" + progress
-				+ ", userOrder=" + userOrder + ", orderDish=" + orderDish + ", orderDrink=" + orderDrink + "]";
+				+ ", userOrder=" + userOrder + ", orderMenuItem=" + orderMenuItem + "]";
 	}
 	
 }
