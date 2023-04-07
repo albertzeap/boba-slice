@@ -48,7 +48,7 @@ public class MyUserDetailsServiceTest {
 		//add users
 		//allUsers.add(new User(Integer id, String username, String password, String firstName, String lastName, String email, Integer paymentCard, Integer phoneNumber, List<UserDietaryRestriction> dietaryRestriction, List<UserOrder> user_order));
 
-		allUsers.add(new User(1, "user1", "password", "first-name1", "last-name1", "a@gmail.com", "123456789", "1112223333", null , null));
+		// allUsers.add(new User(1, "user1", "password", "first-name1", "last-name1", "a@gmail.com", "123456789", "1112223333", null , null));
 
 
 		when( repo.findAll() ).thenReturn(allUsers);

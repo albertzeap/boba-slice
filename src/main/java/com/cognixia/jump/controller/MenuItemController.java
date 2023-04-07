@@ -25,7 +25,7 @@ public class MenuItemController {
 	public ResponseEntity<?> getMenu() throws Exception {
 		List<MenuItem> menuItem = menuItemService.getMenuItemes(); // this will get all the food from dish table and will be displayed as a menu
 		
-		return ResponseEntity.status(200).body(dishes);
+		return ResponseEntity.status(200).body(menuItem);
 	}
 	
     // getting a specific drink
@@ -45,7 +45,7 @@ public class MenuItemController {
         
         menuItem.setId(null);
 
-        MenuItem created = menuItemService.createMenuItem(dish);
+        MenuItem created = menuItemService.createMenuItem(menuItem);
         return ResponseEntity.status(201).body(created);
     }
 

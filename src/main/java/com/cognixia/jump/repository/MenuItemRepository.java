@@ -1,3 +1,5 @@
+package com.cognixia.jump.repository;
+
 
 import java.util.Optional;
 
