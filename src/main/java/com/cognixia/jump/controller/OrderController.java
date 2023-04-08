@@ -2,6 +2,7 @@ package com.cognixia.jump.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,17 @@ public class OrderController {
         return ResponseEntity.status(200).body(items);
     }
 
+    // Create an order
+    @PostMapping("/order/{userId}")
+    public ResponseEntity<?> createOrder(@Valid @PathVariable int userId) throws Exception{
+
+        Order created = orderService.createOrder(userId);
+
+        return ResponseEntity.status(201).body(created);
+
+    }
+
+    // Still need to find a way to update the totalprice of the order when adding an item
     @PostMapping("/order/add")
     public ResponseEntity<?> addItem(@PathParam(value = "menuItemId")int menuItemId, @PathParam(value = "orderId")int orderId) throws ResourceNotFoundException {
 

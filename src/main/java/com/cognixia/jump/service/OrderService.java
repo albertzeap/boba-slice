@@ -1,23 +1,23 @@
 package com.cognixia.jump.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cognixia.jump.model.MenuItem;
 import com.cognixia.jump.exception.ResourceNotFoundException;
+import com.cognixia.jump.model.MenuItem;
 import com.cognixia.jump.model.Order;
 import com.cognixia.jump.model.OrderMenuItem;
+import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.UserOrder;
 import com.cognixia.jump.repository.MenuItemRepository;
 import com.cognixia.jump.repository.OrderMenuItemRepository;
 import com.cognixia.jump.repository.OrderRepository;
-
-import com.cognixia.jump.model.Order;
-import com.cognixia.jump.repository.OrderRepository;
+import com.cognixia.jump.repository.UserOrderRepository;
+import com.cognixia.jump.repository.UserRepository;
 
 @Service
 public class OrderService {
@@ -33,15 +33,35 @@ public class OrderService {
     @Autowired
     MenuItemRepository menuItemRepo;
 
-    public Order createOrder(@Valid Order order) throws Exception {
+    // Repository for User order relationships
+    // Will be used when a user creates a new order
+    @Autowired
+    UserOrderRepository userOrderRepo;
+
+    // Will be used to identify which user is active
+    @Autowired
+    UserRepository userRepo;
+
+    public Order createOrder(int userId) throws Exception {
+
+        // Check if the user is valid 
+        Optional<User> valid = userRepo.findById(userId);
 		
-		Optional<Order> exists = orderRepo.findById(order.getId());
-		
-		if(exists.isPresent()) {
-			throw new Exception("Order with id: " + order.getId() + " already exists");
+        // Must be a user in order to place an order
+		if(!valid.isPresent()) {
+			throw new Exception("Not a valid user");
 		}
-		
-		return orderRepo.save(order);
+
+        // Creates the new order and saves it to the database
+        Date currentDate = new Date();
+        Order newOrder = new Order(null, 0.00, currentDate, false );
+        Order created = orderRepo.save(newOrder);
+
+        // Link the order with the user and save it to the database
+        UserOrder newUserOrder = new UserOrder(null,valid.get(), newOrder);
+		userOrderRepo.save(newUserOrder);
+
+		return created;
 	}
     
     // Gets the history of user orders
