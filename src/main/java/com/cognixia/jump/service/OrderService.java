@@ -89,10 +89,10 @@ public class OrderService {
 
 
     public Boolean deleteItem(int menuItemId, int orderId) throws ResourceNotFoundException {
-    	List<OrderMenuItem> exists = orderRepo.existsItemById(menuItemId, orderId);
+    	List<OrderMenuItem> exists = orderMenuRepo.existsItemById(menuItemId, orderId);
     	
     	if(!exists.isEmpty()) { 
-    		orderRepo.deleteItemById(menuItemId, orderId);
+            orderMenuRepo.deleteById(exists.get(0).getId());
     		return true;
     	}
     	
