@@ -12,9 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -28,21 +28,22 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank
+	@NotNull
 	@Column(columnDefinition="double default 0.00")
 	private Double totalPrice;
 	
-	@NotBlank
+	@NotNull
 	@Column(nullable=false)
 	private Date timeStamp;
 	
-	@NotBlank
+	@NotNull
 	@Column(nullable=false, columnDefinition="boolean default false")
 	private Boolean progress;
 	
 
 	@JsonProperty( access = Access.WRITE_ONLY )
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<UserOrder> userOrder;
 	
 	// One-to-Many relationship between OrderDish
@@ -53,6 +54,15 @@ public class Order implements Serializable{
 	public Order() {
 		
 	}
+
+	public Order(Integer id, Double totalPrice, Date timeStamp, Boolean progress) {
+		this.id = id;
+		this.totalPrice = totalPrice;
+		this.timeStamp = timeStamp;
+		this.progress = progress;
+	}
+
+
 
 	public Integer getId() {
 		return id;

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -19,6 +20,9 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class MenuItem implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+
+	// @NotBlank is only used for String values
+	// @NotNull is used for other values 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +36,15 @@ public class MenuItem implements Serializable{
 	@Column(nullable=false)
 	private String description;
 
-	@NotBlank
+	@NotNull
 	@Column(columnDefinition="double default 1.99")
 	private Double price;
 	
-	@NotBlank
+	@NotNull
 	@Column(columnDefinition="boolean default false") // 0 is false
 	private Boolean veganFriendly;
 	
-	@NotBlank
+	@NotNull
 	@Column(columnDefinition="boolean default false") // 0 is false
 	private Boolean lactoseFriendly;
 	
@@ -57,9 +61,10 @@ public class MenuItem implements Serializable{
 
 	}
 
-	public MenuItem(Integer id, String name, String description, Double price,
-			Boolean veganFriendly, Boolean lactoseFriendly, String type,
-			List<OrderMenuItem> orderMenuItem) {
+	public MenuItem(	Integer id, String name, String description, Double price, 
+						Boolean veganFriendly, Boolean lactoseFriendly, String type,
+						List<OrderMenuItem> orderMenuItem
+					) {
 		super();
 		this.id = id;
 		this.name = name;
