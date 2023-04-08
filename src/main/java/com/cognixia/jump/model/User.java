@@ -164,7 +164,7 @@ public class User implements Serializable{
 		return paymentCard;
 	}
 
-	public void setPaymentCard(String paymentCard) {
+	public void setPaymentCard(@NotBlank @Pattern(regexp="^[0-9]{16}$")String paymentCard) {
 		this.paymentCard = paymentCard;
 	}
 

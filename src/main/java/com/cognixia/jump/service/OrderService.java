@@ -98,7 +98,11 @@ public class OrderService {
         // Add the item to the already existing order
         Order order = getOrderById(orderId);
 
-        // Create a OrderMenu object
+        // Update the total price of the order
+        Double totalPrice = menuItem.get().getPrice() + order.getTotalPrice();
+        orderRepo.updateTotalPrice(totalPrice, orderId);
+
+        // Create an OrderMenu object
         OrderMenuItem newOrderItem = new OrderMenuItem(null, order, menuItem.get());
 
         // Save it to the order_menu_item table
@@ -109,10 +113,27 @@ public class OrderService {
 
 
     public Boolean deleteItem(int menuItemId, int orderId) throws ResourceNotFoundException {
+
     	List<OrderMenuItem> exists = orderMenuRepo.existsItemById(menuItemId, orderId);
+
+        // Find the corresponding menu item
+        Optional<MenuItem> menuItem = menuItemRepo.findById(menuItemId);
+
+        // Find the corresponding order item 
+        Optional<Order> order = orderRepo.findById(orderId);
     	
+        // Check if the item exists in the order
+        // If this check passes it means a menu item and order exists
+        // We could error check for the other items if we wanted to be thorough
     	if(!exists.isEmpty()) { 
+
+            // Just deletes one in case they ordered multiple and want to keep the other orders
             orderMenuRepo.deleteById(exists.get(0).getId());
+
+            // Obtain the new total price of the order and update
+            Double totalPrice = order.get().getTotalPrice() - menuItem.get().getPrice();
+            orderRepo.updateTotalPrice(totalPrice, orderId);
+
     		return true;
     	}
     	

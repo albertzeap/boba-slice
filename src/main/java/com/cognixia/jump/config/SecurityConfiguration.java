@@ -52,6 +52,8 @@ public class SecurityConfiguration {
             .antMatchers(HttpMethod.GET,"/api/order/").permitAll()
             // Create an order
             .antMatchers(HttpMethod.POST,"/api/order/").hasAnyRole("ADMIN", "USER")
+            // Update payment method
+            .antMatchers(HttpMethod.PATCH,"/api/order/").hasAnyRole("ADMIN", "USER")
             // Add an item to order endpoint
             .antMatchers(HttpMethod.POST,"/api/order/add").hasAnyRole("ADMIN", "USER")
             // Remove item from order endpoint

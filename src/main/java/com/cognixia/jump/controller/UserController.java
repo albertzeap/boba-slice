@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,6 +63,15 @@ public class UserController {
         
         User created = userService.createUser(user);
         return ResponseEntity.status(201).body(created);
+    }
+
+    // Updating payment method
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<?> updatePayment(@Valid @PathVariable int id, @RequestBody String paymentMethod) throws ResourceNotFoundException{
+
+        String updated = userService.updatePayment(id, paymentMethod);
+
+        return ResponseEntity.status(200).body(updated);
     }
 
 

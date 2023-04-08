@@ -23,14 +23,20 @@ import com.cognixia.jump.model.OrderMenuItem;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
 	// This does the actual deletion from the orderMenuItem table in MySQL
-	@Transactional
-	@Modifying
-	@Query(value ="delete from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
-	public List<OrderMenuItem> deleteItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
+	// @Transactional
+	// @Modifying
+	// @Query(value ="delete from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
+	// public List<OrderMenuItem> deleteItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
 	
+	// @Transactional
+	// @Modifying
+	// @Query(value ="select * from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
+	// public List<OrderMenuItem> existsItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
+
+	// Updates the total price within the database
 	@Transactional
 	@Modifying
-	@Query(value ="select * from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
-	public List<OrderMenuItem> existsItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
+	@Query(value ="UPDATE orders SET orders.total_price = :totalPrice WHERE orders.id = :orderId", nativeQuery = true)
+	public int updateTotalPrice(@Param(value="totalPrice") Double totalPrice, @Param(value="orderId") int orderId);
     
 }
