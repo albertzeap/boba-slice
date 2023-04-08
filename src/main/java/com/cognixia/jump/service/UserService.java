@@ -3,6 +3,8 @@ package com.cognixia.jump.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,6 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    
     public User getUserById(int id) throws ResourceNotFoundException {
 
         Optional<User> found = userRepo.findById(id);
@@ -43,6 +44,27 @@ public class UserService {
 
 
         return userRepo.save(user);
+    }
+
+    public String updatePayment(int userId, String paymentMethod) throws ResourceNotFoundException{
+
+        // Check if user exists
+        Optional<User> exists = userRepo.findById(userId);
+
+        if(exists.isPresent()){
+
+            User found = exists.get();
+
+            // Run the payment method string through validation
+            found.setPaymentCard(paymentMethod);
+
+            // Update the payment
+            userRepo.updatePayment(found.getPaymentCard(), userId);
+            // Return the new payment card
+            return paymentMethod;
+        }
+
+        throw new ResourceNotFoundException("User", userId);
     }
 
     
