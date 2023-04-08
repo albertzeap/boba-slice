@@ -61,6 +61,20 @@ public class MenuItem implements Serializable{
 
 	}
 
+	
+	public MenuItem(	Integer id, String name, String description,Double price,
+						Boolean veganFriendly, Boolean lactoseFriendly, String type
+					) 
+	{
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.veganFriendly = veganFriendly;
+		this.lactoseFriendly = lactoseFriendly;
+		this.type = type;
+	}
+
 	public MenuItem(	Integer id, String name, String description, Double price, 
 						Boolean veganFriendly, Boolean lactoseFriendly, String type,
 						List<OrderMenuItem> orderMenuItem

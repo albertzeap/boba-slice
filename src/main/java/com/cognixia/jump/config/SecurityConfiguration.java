@@ -42,6 +42,8 @@ public class SecurityConfiguration {
             .antMatchers("/authenticate").permitAll()
             // Creating a user 
             .antMatchers(HttpMethod.POST,"/api/user").permitAll()
+            // Getting a specific menuItem
+            .antMatchers(HttpMethod.GET,"/api/menu/*").permitAll()
             // Getting the boba menu
             .antMatchers(HttpMethod.GET,"/api/menu/drinks").permitAll()
             // Getting the dish menu

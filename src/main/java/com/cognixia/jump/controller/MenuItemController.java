@@ -42,8 +42,17 @@ public class MenuItemController {
         return ResponseEntity.status(200).body(drinks);
     }    
 
-    
+    // Get a specific menu item by id
+    @CrossOrigin
+    @GetMapping("/menu/{id}")
+    public ResponseEntity<?> getMenuItembyId(@PathVariable int id) throws Exception{
 
+        MenuItem found = menuItemService.getMenuItemById(id);
+
+        return ResponseEntity.status(200).body(found);
+    }
+
+    
     // creating a menuItem
     @PostMapping("/menuItem")
     public ResponseEntity<?> createMenuItem(@Valid @RequestBody MenuItem menuItem) throws Exception{
