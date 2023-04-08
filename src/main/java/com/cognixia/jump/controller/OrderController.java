@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class OrderController {
     OrderService orderService;
 
     // Gets the history of orders
+    @CrossOrigin
     @GetMapping("/orders")
     public ResponseEntity<?> getOrders(){
 
@@ -41,6 +43,7 @@ public class OrderController {
     }
 
     // Gets a specific order
+    @CrossOrigin
     @GetMapping("/order/{id}")
     public ResponseEntity<?> getOrderById(@PathVariable int id) throws ResourceNotFoundException {
         

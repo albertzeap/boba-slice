@@ -58,6 +58,8 @@ public class SecurityConfiguration {
             .antMatchers(HttpMethod.POST,"/api/order/add").hasAnyRole("ADMIN", "USER")
             // Remove item from order endpoint
             .antMatchers(HttpMethod.DELETE, "/api/order/remove").hasAnyRole("ADMIN", "USER")
+            // Get user by id
+            .antMatchers(HttpMethod.GET, "/api/user/").hasAnyRole("ADMIN", "USER")
             // Gets list of all users 
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
             .anyRequest().authenticated()
