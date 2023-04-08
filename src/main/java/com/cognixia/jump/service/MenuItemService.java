@@ -15,15 +15,25 @@ public class MenuItemService {
     @Autowired
 	MenuItemRepository menuItemRepo;
 	
-	public List<MenuItem> getMenuItemes() throws Exception {
-		List<MenuItem> MenuItemList = menuItemRepo.findAll();
+	public List<MenuItem> getDishes () throws Exception {
+		List<MenuItem> dishList = menuItemRepo.findByType("Dish");
 		
+
 		// check if there is a list of drinks available
-		if(MenuItemList.isEmpty()) {
-			throw new Exception("No MenuItemes available!");
+		if(dishList.isEmpty()) {
+			throw new Exception("No Menu Items available!");
 		}
 		
-		return MenuItemList;
+		return dishList;
+	}
+
+	public List<MenuItem> getDrinks() throws Exception {
+		List<MenuItem> drinkList = menuItemRepo.findByType("Drink");
+
+		if(drinkList.isEmpty()) {
+			throw new Exception("No Menu Items available!");
+		}
+		return drinkList;
 	}
 	
 	public MenuItem getMenuItemById(int id) throws Exception {
