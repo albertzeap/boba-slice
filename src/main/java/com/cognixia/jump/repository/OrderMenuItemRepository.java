@@ -16,10 +16,10 @@ import com.cognixia.jump.model.OrderMenuItem;
 @Repository
 public interface OrderMenuItemRepository extends JpaRepository<OrderMenuItem, Integer> {
     
-    @Transactional
-	@Modifying
-	@Query(value ="delete from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
-	public List<OrderMenuItem> deleteItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
+    // @Transactional
+	// @Modifying
+	// @Query(value ="delete from order_menu_item o where o.menu_item_id = :menuItemId and o.order_id = :orderId", nativeQuery = true)
+	// public List<OrderMenuItem> deleteItemById(@Param(value="menuItemId") int menuItemId, @Param(value="orderId") int orderId);
 	
 	@Transactional
 	@Modifying

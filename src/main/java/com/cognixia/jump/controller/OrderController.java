@@ -61,7 +61,7 @@ public class OrderController {
 
         orderService.deleteItem(menuItemId, orderId);
 
-        return ResponseEntity.status(200).body("Deleted item with id = " + menuItemId + "from order #" + menuItemId);
+        return ResponseEntity.status(200).body("Deleted item with id = " + menuItemId + "from order #" + orderId);
     }
     
 }  
