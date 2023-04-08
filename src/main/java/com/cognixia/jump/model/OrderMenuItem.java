@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 public class OrderMenuItem implements Serializable{
 
@@ -20,10 +22,12 @@ public class OrderMenuItem implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn( name = "order_id", referencedColumnName = "id")
+	@JsonIgnore
 	private Order order;
 	
 	@ManyToOne
 	@JoinColumn( name = "menu_item_id", referencedColumnName = "id")
+	@JsonIgnore
 	private MenuItem menuItem;
 
 	public OrderMenuItem() {
