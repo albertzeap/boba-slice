@@ -160,6 +160,16 @@ public class MenuItem implements Serializable{
 				+ ", veganFriendly=" + veganFriendly + ", lactoseFriendly=" + lactoseFriendly + ", type=" + type
 				+ ", orderMenuItem=" + orderMenuItem + "]";
 	}
+
+	public String toJson(){
+		return "{\"id\" : " + id 
+				+ ", \"name\" : \"" + name + "\""
+				+ ", \"description\" : \"" + description + "\""
+				+ ", \"price\" : \"" + price + "\""
+				+ ", \"veganFriendly\" : \"" + veganFriendly + "\""
+				+ ", \"lactoseFriendly\" : \"" + lactoseFriendly + "\""
+				+ ", \"type\" : \"" + type + "\"}";
+	}
 	
 	
 }

@@ -46,15 +46,17 @@ public class MenuItemService {
 		return found.get();
 	}
 	
-	public MenuItem createMenuItem(MenuItem MenuItem) throws Exception {
+	public MenuItem createMenuItem(MenuItem menuItem) throws Exception {
 		// we will add proper error checks later on
-		Optional<MenuItem> exists = menuItemRepo.findByName(MenuItem.getName());
+		Optional<MenuItem> exists = menuItemRepo.findByName(menuItem.getName());
 		
 		if(exists.isPresent()) {
-			throw new Exception("MenuItem: " + MenuItem.getName() + " already exists");
+			throw new Exception("MenuItem: " + menuItem.getName() + " already exists");
 		}
 		
-		return menuItemRepo.save(MenuItem);
+		
+		// menuItem.setId(null);
+		return menuItemRepo.save(menuItem);
 	}
 
 }

@@ -54,12 +54,14 @@ public class MenuItemController {
 
     
     // creating a menuItem
-    @PostMapping("/menuItem")
+    @CrossOrigin
+    @PostMapping("/menu")
     public ResponseEntity<?> createMenuItem(@Valid @RequestBody MenuItem menuItem) throws Exception{
-        
+
         menuItem.setId(null);
 
         MenuItem created = menuItemService.createMenuItem(menuItem);
+
         return ResponseEntity.status(201).body(created);
     }
 

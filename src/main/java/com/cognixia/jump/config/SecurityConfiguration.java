@@ -64,6 +64,8 @@ public class SecurityConfiguration {
             .antMatchers(HttpMethod.GET, "/api/user/").hasAnyRole("ADMIN", "USER")
             // Gets list of all users 
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+            // Create a menu item 
+            .antMatchers(HttpMethod.POST, "/api/menu").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
