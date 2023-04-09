@@ -62,7 +62,6 @@ public class OrderController {
 
     }
 
-    // Still need to find a way to update the totalprice of the order when adding an item
     @PostMapping("/order/add")
     public ResponseEntity<?> addItem(@PathParam(value = "menuItemId")int menuItemId, @PathParam(value = "orderId")int orderId) throws ResourceNotFoundException {
 

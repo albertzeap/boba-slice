@@ -70,4 +70,10 @@ public class OrderMenuItem implements Serializable{
 		return "OrderDish [id=" + id + ", order=" + order + ", MenuItem=" + menuItem + "]";
 	}
 
+	public String toJson(){
+		return "{\"id\" : " + id 
+				+ ", \"order\" : \"" + order + "\""
+				+ ", \"MenuItem\" : \"" + menuItem + "\"}";
+	}
+
 }

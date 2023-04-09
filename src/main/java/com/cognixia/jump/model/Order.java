@@ -62,8 +62,6 @@ public class Order implements Serializable{
 		this.progress = progress;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
@@ -123,6 +121,15 @@ public class Order implements Serializable{
 	public String toString() {
 		return "Order [id=" + id + ", totalPrice=" + totalPrice + ", timeStamp=" + timeStamp + ", progress=" + progress
 				+ ", userOrder=" + userOrder + ", orderMenuItem=" + orderMenuItem + "]";
+	}
+
+	public String toJson(){
+		return "{\"id\" : " + id 
+				+ ", \"totalPrice\" : \"" + totalPrice + "\""
+				+ ", \"timeStamp\" : \"" + timeStamp + "\""
+				+ ", \"progress\" : \"" + progress + "\""
+				+ ", \"userOrder\" : \"" + userOrder + "\""
+				+ ", \"orderMenuItem\" : \"" + orderMenuItem + "\"}";
 	}
 	
 }
