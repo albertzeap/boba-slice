@@ -42,6 +42,8 @@ public class SecurityConfiguration {
             .antMatchers("/authenticate").permitAll()
             // Creating a user 
             .antMatchers(HttpMethod.POST,"/api/user").permitAll()
+            // Getting a specific menuItem
+            .antMatchers(HttpMethod.GET,"/api/menu/*").permitAll()
             // Getting the boba menu
             .antMatchers(HttpMethod.GET,"/api/menu/drinks").permitAll()
             // Getting the dish menu
@@ -58,8 +60,12 @@ public class SecurityConfiguration {
             .antMatchers(HttpMethod.POST,"/api/order/add").hasAnyRole("ADMIN", "USER")
             // Remove item from order endpoint
             .antMatchers(HttpMethod.DELETE, "/api/order/remove").hasAnyRole("ADMIN", "USER")
+            // Get user by id
+            .antMatchers(HttpMethod.GET, "/api/user/").hasAnyRole("ADMIN", "USER")
             // Gets list of all users 
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+            // Create a menu item 
+            .antMatchers(HttpMethod.POST, "/api/menu").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

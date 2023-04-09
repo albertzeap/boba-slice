@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
+    @CrossOrigin
     @GetMapping("/users")
     public ResponseEntity<?> getUsers(){
 
@@ -44,6 +46,7 @@ public class UserController {
     }
 
     // getting the specific user
+    @CrossOrigin
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@PathVariable int id) throws ResourceNotFoundException {
 

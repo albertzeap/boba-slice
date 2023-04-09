@@ -212,14 +212,14 @@ public class User implements Serializable{
 		return "{\"id\" : " + id 
 				+ ", \"username\" : \"" + username + "\""
 				+ ", \"password\" : \"" + password + "\""
+				+ ", \"role\" : \"" + role + "\""
+				+ ", \"enabled\" : \"" + enabled + "\""
 				+ ", \"firstName\" : \"" + firstName + "\""
 				+ ", \"lastName\" : \"" + lastName + "\""
 				+ ", \"email\" : \"" + email + "\""
 				+ ", \"paymentCard\" : " + paymentCard 
-				+ ", \"phoneNumber\" : \"" + phoneNumber + "\""
-				+ ", \"user_order\" : \"" + user_order + "\"}";
+				+ ", \"phoneNumber\" : \"" + phoneNumber + "\"}";
 	}
-
 	
 
 	
