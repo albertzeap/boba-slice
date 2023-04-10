@@ -15,15 +15,25 @@ public class MenuItemService {
     @Autowired
 	MenuItemRepository menuItemRepo;
 	
-	public List<MenuItem> getMenuItemes() throws Exception {
-		List<MenuItem> MenuItemList = menuItemRepo.findAll();
+	public List<MenuItem> getDishes () throws Exception {
+		List<MenuItem> dishList = menuItemRepo.findByType("Dish");
 		
+
 		// check if there is a list of drinks available
-		if(MenuItemList.isEmpty()) {
-			throw new Exception("No MenuItemes available!");
+		if(dishList.isEmpty()) {
+			throw new Exception("No Menu Items available!");
 		}
 		
-		return MenuItemList;
+		return dishList;
+	}
+
+	public List<MenuItem> getDrinks() throws Exception {
+		List<MenuItem> drinkList = menuItemRepo.findByType("Drink");
+
+		if(drinkList.isEmpty()) {
+			throw new Exception("No Menu Items available!");
+		}
+		return drinkList;
 	}
 	
 	public MenuItem getMenuItemById(int id) throws Exception {
@@ -36,15 +46,17 @@ public class MenuItemService {
 		return found.get();
 	}
 	
-	public MenuItem createMenuItem(MenuItem MenuItem) throws Exception {
+	public MenuItem createMenuItem(MenuItem menuItem) throws Exception {
 		// we will add proper error checks later on
-		Optional<MenuItem> exists = menuItemRepo.findByName(MenuItem.getName());
+		Optional<MenuItem> exists = menuItemRepo.findByName(menuItem.getName());
 		
 		if(exists.isPresent()) {
-			throw new Exception("MenuItem: " + MenuItem.getName() + " already exists");
+			throw new Exception("MenuItem: " + menuItem.getName() + " already exists");
 		}
 		
-		return menuItemRepo.save(MenuItem);
+		
+		// menuItem.setId(null);
+		return menuItemRepo.save(menuItem);
 	}
 
 }

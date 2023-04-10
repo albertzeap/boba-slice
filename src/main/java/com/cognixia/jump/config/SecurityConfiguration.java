@@ -40,11 +40,32 @@ public class SecurityConfiguration {
         http.csrf().disable()
             .authorizeRequests()
             .antMatchers("/authenticate").permitAll()
+            // Creating a user 
             .antMatchers(HttpMethod.POST,"/api/user").permitAll()
-            .antMatchers("/api/menu").permitAll()
-            .antMatchers("/api/drinks").permitAll()
-            .antMatchers(HttpMethod.POST, "/api/order").permitAll()
+            // Getting a specific menuItem
+            .antMatchers(HttpMethod.GET,"/api/menu/*").permitAll()
+            // Getting the boba menu
+            .antMatchers(HttpMethod.GET,"/api/menu/drinks").permitAll()
+            // Getting the dish menu
+            .antMatchers(HttpMethod.GET,"/api/menu/dishes").permitAll()
+            // Getting a list of all the orders
+            .antMatchers("/api/orders").permitAll()
+            // Gettting an order by id 
+            .antMatchers(HttpMethod.GET,"/api/order/").permitAll()
+            // Create an order
+            .antMatchers(HttpMethod.POST,"/api/order/").hasAnyRole("ADMIN", "USER")
+            // Update payment method
+            .antMatchers(HttpMethod.PATCH,"/api/order/").hasAnyRole("ADMIN", "USER")
+            // Add an item to order endpoint
+            .antMatchers(HttpMethod.POST,"/api/order/add").hasAnyRole("ADMIN", "USER")
+            // Remove item from order endpoint
+            .antMatchers(HttpMethod.DELETE, "/api/order/remove").hasAnyRole("ADMIN", "USER")
+            // Get user by id
+            .antMatchers(HttpMethod.GET, "/api/user/").hasAnyRole("ADMIN", "USER")
+            // Gets list of all users 
             .antMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+            // Create a menu item 
+            .antMatchers(HttpMethod.POST, "/api/menu").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

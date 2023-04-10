@@ -81,11 +81,10 @@ public class User implements Serializable{
 
 	}
 
-	public User(Integer id, @NotBlank String username,
-			@NotBlank @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$") String password, Role role,
-			boolean enabled, @NotBlank String firstName, @NotBlank String lastName,
-			@Pattern(regexp = "^.+@.+$") String email, @NotBlank @Pattern(regexp = "^[0-9]{16}$") String paymentCard,
-			@NotBlank String phoneNumber) {
+	public User(	Integer id,String username, String password, Role role,Boolean enabled, 
+					String firstName, String lastName, String email, String paymentCard,
+					String phoneNumber
+				) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -165,7 +164,7 @@ public class User implements Serializable{
 		return paymentCard;
 	}
 
-	public void setPaymentCard(String paymentCard) {
+	public void setPaymentCard(@NotBlank @Pattern(regexp="^[0-9]{16}$")String paymentCard) {
 		this.paymentCard = paymentCard;
 	}
 
@@ -213,14 +212,14 @@ public class User implements Serializable{
 		return "{\"id\" : " + id 
 				+ ", \"username\" : \"" + username + "\""
 				+ ", \"password\" : \"" + password + "\""
+				+ ", \"role\" : \"" + role + "\""
+				+ ", \"enabled\" : \"" + enabled + "\""
 				+ ", \"firstName\" : \"" + firstName + "\""
 				+ ", \"lastName\" : \"" + lastName + "\""
 				+ ", \"email\" : \"" + email + "\""
 				+ ", \"paymentCard\" : " + paymentCard 
-				+ ", \"phoneNumber\" : \"" + phoneNumber + "\""
-				+ ", \"user_order\" : \"" + user_order + "\"}";
+				+ ", \"phoneNumber\" : \"" + phoneNumber + "\"}";
 	}
-
 	
 
 	

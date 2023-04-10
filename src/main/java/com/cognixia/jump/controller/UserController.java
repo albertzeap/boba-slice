@@ -7,7 +7,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,7 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
+    @CrossOrigin
     @GetMapping("/users")
     public ResponseEntity<?> getUsers(){
 
@@ -43,6 +46,7 @@ public class UserController {
     }
 
     // getting the specific user
+    @CrossOrigin
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@PathVariable int id) throws ResourceNotFoundException {
 
@@ -52,6 +56,7 @@ public class UserController {
     }
 
     // creating a user
+    @CrossOrigin
     @PostMapping("/user")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws UserExistsException{
         
@@ -62,6 +67,15 @@ public class UserController {
         
         User created = userService.createUser(user);
         return ResponseEntity.status(201).body(created);
+    }
+
+    // Updating payment method
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<?> updatePayment(@Valid @PathVariable int id, @RequestBody String paymentMethod) throws ResourceNotFoundException{
+
+        String updated = userService.updatePayment(id, paymentMethod);
+
+        return ResponseEntity.status(200).body(updated);
     }
 
 
