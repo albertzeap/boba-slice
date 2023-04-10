@@ -18,6 +18,8 @@ import javax.validation.constraints.Pattern;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 public class User implements Serializable{
 
@@ -32,7 +34,10 @@ public class User implements Serializable{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Integer id;
-	
+
+	@Schema(description="Username for user", example="Example Title",
+    required=true)
+
 	@NotBlank 
 	private String username;
 	
