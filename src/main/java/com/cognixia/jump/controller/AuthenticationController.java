@@ -16,6 +16,9 @@ import com.cognixia.jump.model.AuthenticationRequest;
 import com.cognixia.jump.model.AuthenticationResponse;
 import com.cognixia.jump.util.JwtUtil;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Authentication", description = "The API for managing Authentication")
 @RestController
 public class AuthenticationController {
     

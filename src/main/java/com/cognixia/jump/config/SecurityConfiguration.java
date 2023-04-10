@@ -39,6 +39,7 @@ public class SecurityConfiguration {
         //fill in the filter chain here, right now we don't have any endpoints so we don't have anything here
         http.csrf().disable()
             .authorizeRequests()
+            .antMatchers("/openapi.html","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
             .antMatchers("/authenticate").permitAll()
             // Creating a user 
             .antMatchers(HttpMethod.POST,"/api/user").permitAll()

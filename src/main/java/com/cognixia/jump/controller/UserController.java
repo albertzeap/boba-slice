@@ -21,8 +21,12 @@ import com.cognixia.jump.exception.UserExistsException;
 import com.cognixia.jump.model.User;
 import com.cognixia.jump.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api")
+@Tag(name = "User", description = "The API for managing Users")
 public class UserController {
 
     @Autowired
@@ -31,6 +35,7 @@ public class UserController {
     @Autowired
     PasswordEncoder encoder;
 
+    @Operation(summary="Get all users in user table", description="Gets all Users in user table from the food_db. Each user has a auto-incremented id, email, is enabled (set to 0), first name, last name, password, payment card, phone umber, user role, and username")
     @CrossOrigin
     @GetMapping("/users")
     public ResponseEntity<?> getUsers(){
@@ -46,6 +51,7 @@ public class UserController {
     }
 
     // getting the specific user
+    @Operation(summary="Get a specific User by id", description="Get the user by id. the ID is created when a new user is registred. Each user ID is unique.")
     @CrossOrigin
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getUserById(@PathVariable int id) throws ResourceNotFoundException {
@@ -56,6 +62,7 @@ public class UserController {
     }
 
     // creating a user
+    @Operation(summary="Create User in user table", description="Creates a user and inserts them into the food_db database. Each user has a auto-incremented id, email, is enabled (set to 0), first name, last name, password, payment card, phone umber, user role, and username")
     @CrossOrigin
     @PostMapping("/user")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws UserExistsException{
@@ -70,6 +77,7 @@ public class UserController {
     }
 
     // Updating payment method
+    @Operation(summary="Update the user payment method", description="Updates the user payement details. The valid payment for card transactionsare 16-digit integers")
     @PatchMapping("/user/{id}")
     public ResponseEntity<?> updatePayment(@Valid @PathVariable int id, @RequestBody String paymentMethod) throws ResourceNotFoundException{
 
