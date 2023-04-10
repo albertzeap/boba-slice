@@ -56,6 +56,7 @@ public class UserController {
     }
 
     // creating a user
+    @CrossOrigin
     @PostMapping("/user")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user) throws UserExistsException{
         

@@ -53,6 +53,7 @@ public class OrderController {
     }
 
     // Create an order
+    @CrossOrigin
     @PostMapping("/order/{userId}")
     public ResponseEntity<?> createOrder(@Valid @PathVariable int userId) throws Exception{
 
@@ -62,6 +63,7 @@ public class OrderController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/order/add")
     public ResponseEntity<?> addItem(@PathParam(value = "menuItemId")int menuItemId, @PathParam(value = "orderId")int orderId) throws ResourceNotFoundException {
 
@@ -70,6 +72,7 @@ public class OrderController {
         return ResponseEntity.status(201).body(menuItem);
     }
 
+    @CrossOrigin
     @DeleteMapping("/order/remove")
     public ResponseEntity<?> removeMenuItem(@PathParam(value="menuItemId") int menuItemId, @PathParam(value="orderId") int orderId) throws ResourceNotFoundException{
 
